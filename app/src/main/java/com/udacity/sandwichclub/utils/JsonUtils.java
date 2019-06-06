@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: static const the string literals
 public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
@@ -17,9 +18,11 @@ public class JsonUtils {
             // create json object, passing in string to constructor
             JSONObject jsonObj = new JSONObject(json);
 
+            // get the string from the main name
             JSONObject jsonName = jsonObj.getJSONObject("name");
             String mainName = jsonName.getString("mainName");
 
+            // get the list of string from the main name
             JSONObject aka = jsonObj.getJSONObject("mainName");
             JSONArray akaJSONArray = aka.getJSONArray("alsoKnownAs");
 
@@ -30,10 +33,12 @@ public class JsonUtils {
                 akaStrings.add(akaJSONArray.getString(count));
             }
 
+            // get the place of origin, description, and image string
             String placeOfOrigin = jsonObj.getString("placeOfOrigin");
             String description = jsonObj.getString("description");
             String image = jsonObj.getString("image");
 
+            // go through the list of ingredients and assign to strings
             JSONArray ingredientsJsonArray = jsonObj.getJSONArray("ingredients");
             List<String> ingredients = new ArrayList<>(ingredientsJsonArray.length());
 
@@ -41,6 +46,7 @@ public class JsonUtils {
                 ingredients.add(ingredientsJsonArray.getString(count1));
             }
 
+            // return a sandwich object, constructed in the return statement
             return new Sandwich(mainName, akaStrings, placeOfOrigin, description, image, ingredients);
 
         } catch (JSONException e) {
