@@ -21,45 +21,46 @@ public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
 
+        // the sandwich object we will return
+        Sandwich sandwich = new Sandwich();
+
         try {
             // create json object, passing in string to constructor
+            // then get the name sub object
             JSONObject jsonObj = new JSONObject(json);
+            JSONObject nameObj = jsonObj.getJSONObject(NAME_TAG);
 
-            // get the string from the main name
-            JSONObject jsonName = jsonObj.getJSONObject(NAME_TAG);
-            String mainName = jsonName.getString(MAIN_NAME_TAG);
+            // set the member variables of sandwich by extracting string from
+            // the json objects.
+            sandwich.setMainName(nameObj.getString(MAIN_NAME_TAG));
+            sandwich.setDescription(jsonObj.getString(DESCRIPTION_TAG));
+            sandwich.setPlaceOfOrigin(jsonObj.getString(ORIGIN_TAG));
+            sandwich.setImage(jsonObj.getString(IMAGE_TAG));
+            sandwich.setAlsoKnownAs(JsonArrayToStringList(nameObj.getJSONArray(AKA_TAG)));
+            sandwich.setIngredients(JsonArrayToStringList(jsonObj.getJSONArray(INGREDIENTS_TAG)));
 
-            // get the list of  aka
-            JSONObject aka = jsonObj.getJSONObject(MAIN_NAME_TAG);
-            JSONArray akaJSONArray = aka.getJSONArray(AKA_TAG);
-
-            // go through the aka list and assign the strings
-            List<String> akaStrings = new ArrayList<>(akaJSONArray.length());
-
-            for (int count = 0; count < akaJSONArray.length(); count++) {
-                akaStrings.add(akaJSONArray.getString(count));
-            }
-
-            // get the place of origin, description, and image string
-            String placeOfOrigin = jsonObj.getString(ORIGIN_TAG);
-            String description = jsonObj.getString(DESCRIPTION_TAG);
-            String image = jsonObj.getString(IMAGE_TAG);
-
-            // go through the list of ingredients and assign to strings
-            JSONArray ingredientsJsonArray = jsonObj.getJSONArray(INGREDIENTS_TAG);
-            List<String> ingredients = new ArrayList<>(ingredientsJsonArray.length());
-
-            for (int count1 = 0; count1 < jsonObj.length(); count1++) {
-                ingredients.add(ingredientsJsonArray.getString(count1));
-            }
-
-            // return a sandwich object, constructed in the return statement
-            return new Sandwich(mainName, akaStrings, placeOfOrigin, description, image, ingredients);
+            return sandwich;
 
         } catch (JSONException e) {
-            // TODO: print something meaningful
+            e.printStackTrace();
             return null;
         }
 
+    }
+
+    // helper function to go through the json array and return a list of strings
+    public static ArrayList<String> JsonArrayToStringList(JSONArray array) {
+        ArrayList<String> strings = new ArrayList<>();
+        try {
+            // move through the JSONArray and get strings and put into string list
+            for(int count = 0; count < array.length(); count++) {
+                strings.add(array.getString(count));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return strings;
     }
 }
