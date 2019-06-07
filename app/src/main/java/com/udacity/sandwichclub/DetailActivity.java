@@ -19,6 +19,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+    // declare variables and the UI widgets to bind with
     @BindView(R.id.also_known_tv)
     TextView mAlsoKnown;
 
@@ -66,11 +67,7 @@ public class DetailActivity extends AppCompatActivity {
                 return;
             }
 
-            populateUI();
-
-            Picasso.with(this)
-                    .load(sandwich.getImage())
-                    .into(mImage);
+            populateUI(sandwich);
 
             setTitle(sandwich.getMainName());
 
@@ -82,7 +79,30 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
-        ;
+    // populate the gui with values from the sandwich object
+    private void populateUI(Sandwich sandwich) {
+
+        // use a string builder to build a string from the aka string list
+        StringBuilder akaBuilder = new StringBuilder();
+        for(int count1 = 0; count1 < sandwich.getAlsoKnownAs().size(); count1++) {
+            akaBuilder.append(sandwich.getAlsoKnownAs().get(count1));
+        }
+        mAlsoKnown.setText(akaBuilder.toString());
+
+        // set the description and place of origin
+        mOrigin.setText(sandwich.getPlaceOfOrigin());
+        mDescription.setText(sandwich.getDescription());
+
+        // use a string builder to build a string from the ingredient string list
+        StringBuilder ingredientBuilder = new StringBuilder();
+        for(int count2 = 0; count2 < sandwich.getAlsoKnownAs().size(); count2++) {
+            ingredientBuilder.append(sandwich.getIngredients().get(count2));
+        }
+        mIngredients.setText(ingredientBuilder.toString());
+
+        // load into the image from the image url
+        Picasso.with(this)
+                .load(sandwich.getImage())
+                .into(mImage);
     }
 }
