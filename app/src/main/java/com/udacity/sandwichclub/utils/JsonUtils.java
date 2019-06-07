@@ -11,6 +11,7 @@ import java.util.List;
 
 public class JsonUtils {
 
+    // define the tags in the xml for the data we will extract
     public static final String NAME_TAG = "name";
     public static final String MAIN_NAME_TAG = "mainName";
     public static final String AKA_TAG = "alsoKnownAs";
