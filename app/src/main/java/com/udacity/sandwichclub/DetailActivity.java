@@ -100,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         mIngredients.setText(ingredientBuilder.toString());
 
-        // load into the image from the image url
+        // load into the image view from the image url
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(mImage);
