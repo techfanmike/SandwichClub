@@ -46,7 +46,6 @@ public class JsonUtils {
             e.printStackTrace();
             return null;
         }
-
     }
 
     // helper function to go through the json array and return a list of strings
@@ -54,7 +53,7 @@ public class JsonUtils {
         ArrayList<String> strings = new ArrayList<>();
         try {
             // move through the JSONArray and get strings and put into string list
-            for(int count = 0; count < array.length(); count++) {
+            for (int count = 0; count < array.length(); count++) {
                 strings.add(array.getString(count));
             }
 

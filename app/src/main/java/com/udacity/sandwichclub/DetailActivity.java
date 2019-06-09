@@ -84,9 +84,14 @@ public class DetailActivity extends AppCompatActivity {
 
         // use a string builder to build a string from the aka string list
         StringBuilder akaBuilder = new StringBuilder();
+
         for(int count1 = 0; count1 < sandwich.getAlsoKnownAs().size(); count1++) {
             akaBuilder.append(sandwich.getAlsoKnownAs().get(count1));
+            if((count1 + 1) < sandwich.getAlsoKnownAs().size()) {
+                akaBuilder.append(", ");
+            }
         }
+
         mAlsoKnown.setText(akaBuilder.toString());
 
         // set the description and place of origin
@@ -95,9 +100,14 @@ public class DetailActivity extends AppCompatActivity {
 
         // use a string builder to build a string from the ingredient string list
         StringBuilder ingredientBuilder = new StringBuilder();
+
         for(int count2 = 0; count2 < sandwich.getIngredients().size(); count2++) {
             ingredientBuilder.append(sandwich.getIngredients().get(count2));
+            if((count2 + 1) < sandwich.getIngredients().size()) {
+                ingredientBuilder.append(", ");
+            }
         }
+
         mIngredients.setText(ingredientBuilder.toString());
 
         // load into the image view from the image url
