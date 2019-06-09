@@ -34,9 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/image_iv"
-            android:layout_toRightOf="@id/aka_desc"
             android:layout_toEndOf="@id/aka_desc"
-           />
+            android:layout_toRightOf="@id/aka_desc" />
 
         <TextView
             android:id="@+id/origin_desc"
@@ -53,8 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/also_known_tv"
-            android:layout_toRightOf="@id/origin_desc"
-            android:layout_toEndOf="@id/origin_desc" />
+            android:layout_toEndOf="@id/origin_desc"
+            android:layout_toRightOf="@id/origin_desc" />
 
         <TextView
             android:id="@+id/ingredients_desc"
@@ -71,8 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/origin_tv"
-            android:layout_toRightOf="@id/ingredients_desc"
-            android:layout_toEndOf="@id/ingredients_desc"/>
+            android:layout_toEndOf="@id/ingredients_desc"
+            android:layout_toRightOf="@id/ingredients_desc" />
 
         <TextView
             android:id="@+id/description_desc"
@@ -89,8 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/ingredients_tv"
-            android:layout_toRightOf="@id/description_desc"
-            android:layout_toEndOf="@id/description_desc"/>
+            android:layout_toEndOf="@id/description_desc"
+            android:layout_toRightOf="@id/description_desc" />
 
     </RelativeLayout>
 </ScrollView>
