@@ -95,7 +95,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // use a string builder to build a string from the ingredient string list
         StringBuilder ingredientBuilder = new StringBuilder();
-        for(int count2 = 0; count2 < sandwich.getAlsoKnownAs().size(); count2++) {
+        for(int count2 = 0; count2 < sandwich.getIngredients().size(); count2++) {
             ingredientBuilder.append(sandwich.getIngredients().get(count2));
         }
         mIngredients.setText(ingredientBuilder.toString());
