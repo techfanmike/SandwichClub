@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -47,9 +49,9 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent == null) {
             closeOnError();
-        // the starter code miffed the else that avoids a null warning on getIntExtra
+            // the starter code miffed the else that avoids a null warning on getIntExtra
         } else {
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+            int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
 
             if (position == DEFAULT_POSITION) {
                 // EXTRA_POSITION not found in intent
@@ -81,38 +83,28 @@ public class DetailActivity extends AppCompatActivity {
 
     // populate the gui with values from the sandwich object
     private void populateUI(Sandwich sandwich) {
-
-        // use a string builder to build a string from the aka string list
-        StringBuilder akaBuilder = new StringBuilder();
-
-        for(int count1 = 0; count1 < sandwich.getAlsoKnownAs().size(); count1++) {
-            akaBuilder.append(sandwich.getAlsoKnownAs().get(count1));
-            if((count1 + 1) < sandwich.getAlsoKnownAs().size()) {
-                akaBuilder.append(", ");
-            }
-        }
-
-        mAlsoKnown.setText(akaBuilder.toString());
-
-        // set the description and place of origin
+        mAlsoKnown.setText(buildStringFromList(sandwich.getAlsoKnownAs()));
         mOrigin.setText(sandwich.getPlaceOfOrigin());
         mDescription.setText(sandwich.getDescription());
-
-        // use a string builder to build a string from the ingredient string list
-        StringBuilder ingredientBuilder = new StringBuilder();
-
-        for(int count2 = 0; count2 < sandwich.getIngredients().size(); count2++) {
-            ingredientBuilder.append(sandwich.getIngredients().get(count2));
-            if((count2 + 1) < sandwich.getIngredients().size()) {
-                ingredientBuilder.append(", ");
-            }
-        }
-
-        mIngredients.setText(ingredientBuilder.toString());
+        mIngredients.setText(buildStringFromList(sandwich.getIngredients()));
 
         // load into the image view from the image url
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(mImage);
+    }
+
+    // helper function to build string with spaces and commas between list items
+    String buildStringFromList(List<String> stringList) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int count = 0; count < stringList.size(); count++) {
+            builder.append(stringList.get(count));
+            if ((count + 1) < stringList.size()) {
+                builder.append(", ");
+            }
+        }
+
+        return builder.toString();
     }
 }
